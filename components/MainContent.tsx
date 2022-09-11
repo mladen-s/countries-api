@@ -2,11 +2,13 @@ import Country from "./Country";
 import Select from "./Select";
 import Input from "./Input";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const MainContent = ({ data }: any) => {
   const [input, setInput] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState(data);
+  const router = useRouter();
   const re = RegExp(`.*${input.toLowerCase().split("").join(".*")}.*`);
 
   // get unique regions from data
@@ -84,7 +86,15 @@ const MainContent = ({ data }: any) => {
         <ul>
           {content.map((country: any) => {
             return (
-              <li key={country.name.common}>
+              <li
+                key={country.name.common}
+                onClick={() => {
+                  router.push({
+                    pathname: "/detailed",
+                    query: { single: country.name.common },
+                  });
+                }}
+              >
                 <Country country={country} />
               </li>
             );

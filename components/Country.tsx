@@ -6,7 +6,8 @@ const Country = ({ country }: any) => {
       <img src={country.flags.png} alt="country flag" />
       <h2>{country.name.common}</h2>
       <p>
-        <span className="medium-bold">Population:</span> {country.population}
+        <span className="medium-bold">Population:</span>{" "}
+        {new Intl.NumberFormat().format(country.population)}
       </p>
       <p>
         <span className="medium-bold">Region:</span> {country.region}
