@@ -102,6 +102,10 @@ img {
   padding: 18px 28px;
 }
 
+.main .list {
+  min-height: 40vh;
+}
+
 .input input {
   border-style: none;
   margin: 0 0 0 30px;
@@ -161,6 +165,7 @@ img {
 .footer {
   border-radius: 0;
   box-shadow: none;
+  height: 45px;
 }
 
 .header {

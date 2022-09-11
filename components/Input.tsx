@@ -13,7 +13,16 @@ const Input = ({ setInput }: IInput) => {
         name="search"
         placeholder="Search for a country..."
         onChange={(e) => {
-          setInput(e.target.value, e);
+          let input = e.target.value;
+
+          // regexp for accepting only letters
+          const re = RegExp(`[^A-Za-z]`);
+          if (re.test(input)) {
+            e.target.value = e.target.value.replace(re, "");
+            input = e.target.value;
+          }
+
+          setInput(input, e);
         }}
       />
     </div>
