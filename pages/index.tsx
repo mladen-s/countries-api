@@ -18,9 +18,6 @@ export default function Home() {
         setData(data);
         setLoading(false);
       });
-
-    console.log(data);
-    console.log(loading);
   }, []);
 
   return (
@@ -37,10 +34,6 @@ export default function Home() {
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap"
-          rel="stylesheet"
         />
       </Head>
       {data === undefined ? (

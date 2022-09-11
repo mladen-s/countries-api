@@ -6,9 +6,17 @@ interface ISelect {
   regionState: string;
   regions: string[];
   setRegion: React.Dispatch<React.SetStateAction<string>>;
+  setContent: React.Dispatch<React.SetStateAction<any[]>>;
+  data: any[];
 }
 
-const Select = ({ regionState, regions, setRegion }: ISelect) => {
+const Select = ({
+  regionState,
+  regions,
+  setRegion,
+  setContent,
+  data,
+}: ISelect) => {
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -35,6 +43,11 @@ const Select = ({ regionState, regions, setRegion }: ISelect) => {
                 key={region}
                 onClick={() => {
                   region === regionState ? setRegion("") : setRegion(region);
+
+                  const regData = data.filter((country: any) => {
+                    return country.region == region;
+                  });
+                  setContent(regData);
                 }}
               >
                 {region}
