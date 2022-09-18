@@ -4,6 +4,7 @@ import Input from "./Input";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import { setCountry } from "../redux/countrySlice";
 
 const MainContent = ({ data }: any) => {
   const [input, setInput] = useState("");
@@ -92,6 +93,7 @@ const MainContent = ({ data }: any) => {
               <li
                 key={country.name.common}
                 onClick={() => {
+                  dispatch(setCountry(country));
                   router.push({
                     pathname: "/detailed",
                     query: { single: country.name.common },

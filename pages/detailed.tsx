@@ -9,14 +9,41 @@ const Detailed = () => {
   const router = useRouter();
   let countryName = router.query;
   const { data, error, isLoading } = useGetCountriesQuery();
-  const country = useSelector((state: any) => state.country.getCountry());
+  const country = useSelector((state: any) => state.country.value);
 
   //   const [countryData, setCountryData]: any = useState();
   //   const [data, setData]: any[] = useState();
 
   useEffect(() => {
-    // console.log(data);
+    // console.log(country);
   }, []);
+
+  const findLanguages = (object: any) => {
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        return element;
+      }
+    }
+  };
+
+  const findCurrencies = (object: any) => {
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        return element.name;
+      }
+    }
+  };
+
+  const findNativeName = (object: any) => {
+    for (const key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        return element.common;
+      }
+    }
+  };
 
   if (error)
     return (
@@ -40,21 +67,26 @@ const Detailed = () => {
         </Link>
         <img src="" alt="" />
         <h1>{countryName.single}</h1>
-        {/* <div className="base-info info">
-          <p>Native Name: {}</p>
-          <p>Population: {countryData.population}</p>
-          <p>Region: {countryData.region}</p>
-          <p>Sub Region: {}</p>
-          <p>Capital: {countryData.capital}</p>
+        <div className="base-info info">
+          <p>Native Name: {findNativeName(country.name.nativeName)}</p>
+          <p>
+            Population: {new Intl.NumberFormat().format(country.population)}
+          </p>
+          <p>Region: {country.region}</p>
+          <p>Sub Region: {country.subregion}</p>
+          <p>Capital: {country.capital}</p>
         </div>
         <div className="additional-info info">
-          <p>Top Level Domain: {}</p>
-          <p>Currencies: {}</p>
-          <p>Languages: {}</p>
-        </div> */}
-        <div className="border">
-          {}
-          <p className="element">country1</p>
+          <p>Top Level Domain: {country.tld}</p>
+          <p>Currencies: {findCurrencies(country.currencies)}</p>
+          <p>Languages: {findLanguages(country.languages)}</p>
+        </div>
+        <div className="border container">
+          {country.borders.length > 0
+            ? country.borders.map((item: string) => {
+                return <p className="element">{item}</p>;
+              })
+            : "Island Country"}
         </div>
       </div>
     </div>
