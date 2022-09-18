@@ -3,12 +3,15 @@ import Select from "./Select";
 import Input from "./Input";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const MainContent = ({ data }: any) => {
   const [input, setInput] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState(data);
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const re = RegExp(`.*${input.toLowerCase().split("").join(".*")}.*`);
 
   // get unique regions from data

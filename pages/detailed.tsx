@@ -2,17 +2,28 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useGetCountriesQuery } from "../redux/countriesApi";
+import { useSelector } from "react-redux";
 
 const Detailed = () => {
   const router = useRouter();
   let countryName = router.query;
+  const { data, error, isLoading } = useGetCountriesQuery();
+  const country = useSelector((state: any) => state.country.getCountry());
 
   //   const [countryData, setCountryData]: any = useState();
   //   const [data, setData]: any[] = useState();
 
   useEffect(() => {
-    console.log(countryName);
-  }, [router.query]);
+    // console.log(data);
+  }, []);
+
+  if (error)
+    return (
+      <p className="element">Oops! We have some technical difficulties.</p>
+    );
+
+  if (isLoading) return <p className="element">Loading...</p>;
 
   return (
     <div className="container main">

@@ -2,23 +2,33 @@ import { useEffect, useState } from "react";
 // components
 import Head from "next/head";
 import MainContent from "../components/MainContent";
-
-const API_URL = "https://restcountries.com/v3.1/all";
+import { useGetCountriesQuery } from "../redux/countriesApi";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(undefined) as any;
+  const { data, error, isLoading } = useGetCountriesQuery();
 
-  useEffect(() => {
-    setLoading(true);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (data !== undefined) {
+  //     console.log(data);
+  //     setFetchedData(JSON.stringify(data));
+  //     setLoading(false);
+  //   }
+  //   console.log(data);
+  //   console.log(isFetching);
+  //   console.log(isLoading);
+  //   console.log(isSuccess);
+  //   console.log(isError);
 
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
+  //   // console.log(JSON.stringify(data));
+  // }, [data, loading, isSuccess, isLoading, isFetching, isError]);
+
+  if (error)
+    return (
+      <p className="element">Oops! We have some technical difficulties.</p>
+    );
+
+  if (isLoading) return <p className="element">Loading...</p>;
 
   return (
     <div className="container">
@@ -36,11 +46,7 @@ export default function Home() {
           crossOrigin="true"
         />
       </Head>
-      {data === undefined ? (
-        <p className="element">Loading...</p>
-      ) : (
-        <MainContent data={data} />
-      )}
+      <MainContent data={data} />
     </div>
   );
 }
