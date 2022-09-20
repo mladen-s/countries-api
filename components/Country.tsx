@@ -3,7 +3,7 @@ import React from "react";
 const Country = ({ country }: any) => {
   return (
     <div className="container element country">
-      <img src={country.flags.png} alt="country flag" />
+      <img src={country.flags.png} alt={"flag of " + country.name.common} />
       <h2>{country.name.common}</h2>
       <p>
         <span className="medium-bold">Population:</span>{" "}

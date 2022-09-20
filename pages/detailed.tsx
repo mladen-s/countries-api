@@ -54,7 +54,7 @@ const Detailed = () => {
 
   return (
     <div className="container main">
-      <div className="country">
+      <div className="country detailed">
         <Link
           href={{
             pathname: "/",
@@ -65,28 +65,49 @@ const Detailed = () => {
             Back
           </a>
         </Link>
-        <img src="" alt="" />
-        <h1>{countryName.single}</h1>
+        <img src={country.flags.png} alt={"flag of " + country.name.common} />
+        <h2>{countryName.single}</h2>
         <div className="base-info info">
-          <p>Native Name: {findNativeName(country.name.nativeName)}</p>
           <p>
-            Population: {new Intl.NumberFormat().format(country.population)}
+            <span className="medium-bold"> Native Name:</span>{" "}
+            {findNativeName(country.name.nativeName)}
           </p>
-          <p>Region: {country.region}</p>
-          <p>Sub Region: {country.subregion}</p>
-          <p>Capital: {country.capital}</p>
+          <p>
+            <span className="medium-bold">Population:</span>{" "}
+            {new Intl.NumberFormat().format(country.population)}
+          </p>
+          <p>
+            <span className="medium-bold">Region:</span> {country.region}
+          </p>
+          <p>
+            <span className="medium-bold">Sub Region:</span> {country.subregion}
+          </p>
+          <p>
+            <span className="medium-bold">Capital:</span> {country.capital}
+          </p>
         </div>
         <div className="additional-info info">
-          <p>Top Level Domain: {country.tld}</p>
-          <p>Currencies: {findCurrencies(country.currencies)}</p>
-          <p>Languages: {findLanguages(country.languages)}</p>
+          <p>
+            <span className="medium-bold">Top Level Domain:</span> {country.tld}
+          </p>
+          <p>
+            <span className="medium-bold">Currencies:</span>{" "}
+            {findCurrencies(country.currencies)}
+          </p>
+          <p>
+            <span className="medium-bold">Languages:</span>{" "}
+            {findLanguages(country.languages)}
+          </p>
         </div>
         <div className="border container">
-          {country.borders.length > 0
-            ? country.borders.map((item: string) => {
-                return <p className="element">{item}</p>;
-              })
-            : "Island Country"}
+          <p className="medium-bold">Border countries:</p>
+          <div className="border-countries">
+            {country.borders.length > 0
+              ? country.borders.map((item: string) => {
+                  return <p className="element">{item}</p>;
+                })
+              : "Island Country"}
+          </div>
         </div>
       </div>
     </div>

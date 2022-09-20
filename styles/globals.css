@@ -165,12 +165,15 @@ img {
 .footer {
   border-radius: 0;
   box-shadow: none;
-  height: 45px;
+  min-height: 45px;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .header {
-  height: 90px;
+  height: 80px;
   border-radius: 0;
+  font-size: 0.9rem;
   position: relative;
   -webkit-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.1);
   -moz-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.1);
@@ -218,10 +221,76 @@ img {
 
 /* detailed page */
 .back {
+  padding: 5px 25px;
+  border-radius: 2px;
+
+  border: none;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.4);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.4);
+  box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.4);
+}
+
+.detailed .back {
+  margin: 10px 0 50px;
+}
+
+.main .detailed {
+  width: 100%;
+  padding: 10px;
+  margin: 0 35px 15px;
+}
+
+.main .detailed img {
+  border-radius: 2px;
+}
+
+.main .detailed h2 {
+  padding: 15px 0 0;
+  margin: 0;
+}
+
+.detailed .info p {
+  padding: 5px 0 5px;
+}
+
+.base-info,
+.additional-info {
+  margin: 20px 0;
+}
+
+.border {
+  flex-direction: column;
+  padding: 0;
+  margin: 15px 0 0;
+}
+
+.border > p {
+  font-size: 1.2rem;
+  padding: 0 !important;
+  margin: 0 0 15px;
+  align-self: flex-start;
+}
+
+.detailed .border-countries p {
+  flex: 2 2 90px;
+  min-width: 90px;
+  padding: 5px 15px;
+  margin: 5px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 2px;
+
   border: none;
   -webkit-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
   -moz-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
   box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
+}
+
+.border-countries {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 -5px 0;
 }
 
 @media (prefers-color-scheme: dark) {

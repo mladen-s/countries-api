@@ -12,6 +12,10 @@ function Layout({ children }: ILayout) {
       {children}
       <footer className="element container footer">
         <p>Created by Mladen Stankovic, 2022</p>
+        <p>
+          Challenge from{" "}
+          <a href="https://www.frontendmentor.io"> www.frontendmentor.io</a>
+        </p>
       </footer>
     </div>
   );
