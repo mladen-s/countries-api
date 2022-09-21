@@ -303,6 +303,8 @@ img {
   margin: 0 -5px 0;
 }
 
+/* Dark mode */
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
