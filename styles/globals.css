@@ -259,6 +259,7 @@ img {
 }
 
 .border {
+  width: 100%;
   flex-direction: column;
   padding: 0;
   margin: 15px 0 0;
@@ -271,19 +272,28 @@ img {
   align-self: flex-start;
 }
 
+.detailed .border-countries {
+  width: 100%;
+}
+
 .detailed .border-countries p {
-  flex: 2 2 90px;
+  display: flex;
+  flex: 1 1 90px;
   min-width: 90px;
   padding: 5px 15px;
   margin: 5px;
   font-size: 0.8rem;
-  text-align: center;
   border-radius: 2px;
+  justify-content: center;
 
   border: none;
   -webkit-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
   -moz-box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
   box-shadow: 0px 0px 10px 1px rgba(122, 122, 122, 0.3);
+}
+.detailed .border-countries p span {
+  text-align: center;
+  white-space: nowrap;
 }
 
 .border-countries {

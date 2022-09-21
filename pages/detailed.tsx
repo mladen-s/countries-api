@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useGetCountriesQuery } from "../redux/countriesApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
+import BorderCountries from "../components/BorderCountries";
 
 const Detailed = () => {
   const router = useRouter();
@@ -105,7 +106,7 @@ const Detailed = () => {
           <div className="additional-info info">
             <p>
               <span className="medium-bold">Top Level Domain:</span>{" "}
-              {country.tld[0]}
+              {country.tld ? country.tld[0] : "/"}
             </p>
             <p>
               <span className="medium-bold">Currencies:</span>{" "}
@@ -134,17 +135,7 @@ const Detailed = () => {
           </div>
           <div className="border container">
             <p className="medium-bold">Border countries:</p>
-            <div className="border-countries">
-              {country.borders !== undefined
-                ? country.borders.map((item: string) => {
-                    return (
-                      <p className="element" key={item}>
-                        {item}
-                      </p>
-                    );
-                  })
-                : "This is an island country. It doesn't border any other country."}
-            </div>
+            <BorderCountries country={country} data={data} />
           </div>
         </div>
       </div>
