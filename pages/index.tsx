@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import MainContent from "../components/MainContent";
 import { useGetCountriesQuery } from "../redux/countriesApi";
+import { JSONValue } from "../interface";
+
+interface Query {
+  data: JSONValue;
+  error: JSONValue;
+  isLoading: boolean;
+}
 
 export default function Home() {
-  const { data, error, isLoading } = useGetCountriesQuery();
+  const { data, error, isLoading } = useGetCountriesQuery() as Query;
 
   // useEffect(() => {
   //   setLoading(true);

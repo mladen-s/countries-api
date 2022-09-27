@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
+import { JSONValue } from "../interface";
 
-const BorderCountries = ({ country, data }: any) => {
+const BorderCountries = ({ country, data }: JSONValue) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [countries, setCountries] = useState(undefined) as any;
+  const [countries, setCountries] = useState(undefined) as JSONValue;
 
   useEffect(() => {
     if (country.borders) {
-      let cData = data.filter((c: any) => {
+      let cData = data.filter((c: JSONValue) => {
         let border;
         country.borders.forEach((b: string) => {
           c.cca3 === b ? (border = b) : "";
@@ -25,7 +26,7 @@ const BorderCountries = ({ country, data }: any) => {
   return (
     <div className="border-countries">
       {country.borders !== undefined && countries !== undefined
-        ? countries.map((item: any) => {
+        ? countries.map((item: JSONValue) => {
             return (
               <p
                 className="element"

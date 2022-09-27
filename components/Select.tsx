@@ -1,13 +1,14 @@
 import { GrFormDown } from "react-icons/gr";
 import { BsCheckLg } from "react-icons/bs";
 import React, { useState } from "react";
+import { JSONValue } from "../interface";
 
 interface ISelect {
   regionState: string;
   regions: string[];
   setRegion: React.Dispatch<React.SetStateAction<string>>;
-  setContent: React.Dispatch<React.SetStateAction<any[]>>;
-  data: any[];
+  setContent: React.Dispatch<React.SetStateAction<JSONValue>>;
+  data: JSONValue;
 }
 
 const Select = ({
@@ -44,7 +45,7 @@ const Select = ({
                 onClick={() => {
                   region === regionState ? setRegion("") : setRegion(region);
 
-                  const regData = data.filter((country: any) => {
+                  const regData = data.filter((country: JSONValue) => {
                     return country.region == region;
                   });
                   setContent(regData);

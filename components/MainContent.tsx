@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
+import { JSONValue } from "../interface";
 
-const MainContent = ({ data }: any) => {
+const MainContent = ({ data }: JSONValue) => {
   const [input, setInput] = useState("");
   const [region, setRegion] = useState("");
   const [content, setContent] = useState(data);
@@ -16,17 +17,17 @@ const MainContent = ({ data }: any) => {
   const re = RegExp(`.*${input.toLowerCase().split("").join(".*")}.*`);
 
   // get unique regions from data
-  const distinct = (value: string, index: number, self: any) => {
+  const distinct = (value: string, index: number, self: JSONValue) => {
     return self.indexOf(value) === index;
   };
 
-  const regionsFull = data.map((item: any) => {
+  const regionsFull = data.map((item: JSONValue) => {
     return item.region;
   });
   const regions: string[] = regionsFull.filter(distinct);
 
   // reorder searched results
-  function arraymove(arr: any[], fromIndex: number, toIndex: number) {
+  function arraymove(arr: JSONValue, fromIndex: number, toIndex: number) {
     var element = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, element);
@@ -37,13 +38,13 @@ const MainContent = ({ data }: any) => {
       if (input.length === 0) {
         setContent(data);
       } else {
-        const inputData = data.filter((country: any) => {
+        const inputData = data.filter((country: JSONValue) => {
           let countryName = country.name.common.toLowerCase();
 
           return countryName.match(re);
         });
 
-        inputData.forEach((country: any, i: number) => {
+        inputData.forEach((country: JSONValue, i: number) => {
           let countryName = country.name.common.toLowerCase();
 
           if (countryName.includes(input)) {
@@ -59,10 +60,10 @@ const MainContent = ({ data }: any) => {
       }
     } else {
       if (input.length > 0) {
-        const regData = data.filter((country: any) => {
+        const regData = data.filter((country: JSONValue) => {
           return country.region == region;
         });
-        const inputData = regData.filter((country: any) => {
+        const inputData = regData.filter((country: JSONValue) => {
           let countryName = country.name.common.toLowerCase();
 
           return countryName.match(re);
@@ -88,7 +89,7 @@ const MainContent = ({ data }: any) => {
       />
       <div className="list">
         <ul>
-          {content.map((country: any) => {
+          {content.map((country: JSONValue) => {
             return (
               <li
                 key={country.name.common}

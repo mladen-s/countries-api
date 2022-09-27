@@ -1,6 +1,7 @@
 import React from "react";
+import { JSONValue } from "../interface";
 
-const Country = ({ country }: any) => {
+const Country = ({ country }: JSONValue) => {
   return (
     <div className="container element country">
       <img src={country.flags.png} alt={"flag of " + country.name.common} />

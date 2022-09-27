@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { useSelector, useDispatch } from "react-redux";
 import { setDark } from "../redux/themeSlice";
+import { JSONValue } from "../interface";
 
 interface ILayout {
   children?: JSX.Element | JSX.Element[] | React.ReactNode;
@@ -9,7 +10,7 @@ interface ILayout {
 
 function Layout({ children }: ILayout) {
   const dispatch = useDispatch();
-  const theme = useSelector((state: any) => state.theme.value);
+  const theme = useSelector((state: JSONValue) => state.theme.value);
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {

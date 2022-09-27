@@ -6,17 +6,18 @@ import { useGetCountriesQuery } from "../redux/countriesApi";
 import { useSelector, useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
 import BorderCountries from "../components/BorderCountries";
+import { JSONValue } from "../interface";
 
 const Detailed = () => {
   const router = useRouter();
   let countryName = router.query.single;
   const { data, error, isLoading } = useGetCountriesQuery();
   const dispatch = useDispatch();
-  const country = useSelector((state: any) => state.country.value);
+  const country = useSelector((state: JSONValue) => state.country.value);
 
   useEffect(() => {
     if (!country && data) {
-      let cData = data.filter((c: any) => {
+      let cData = data.filter((c: JSONValue) => {
         if (countryName) {
           return (
             c.name.common.toLowerCase() == countryName.toString().toLowerCase()
@@ -28,7 +29,7 @@ const Detailed = () => {
     }
   }, [countryName, data, country]);
 
-  const findLanguages = (object: any) => {
+  const findLanguages = (object: JSONValue) => {
     let element = [];
     for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
@@ -38,7 +39,7 @@ const Detailed = () => {
     return element;
   };
 
-  const findCurrencies = (object: any) => {
+  const findCurrencies = (object: JSONValue) => {
     let element = [];
     for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
@@ -48,7 +49,7 @@ const Detailed = () => {
     return element;
   };
 
-  const findNativeName = (object: any) => {
+  const findNativeName = (object: JSONValue) => {
     for (const key in object) {
       if (Object.prototype.hasOwnProperty.call(object, key)) {
         const element = object[key];
