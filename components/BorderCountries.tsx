@@ -27,18 +27,18 @@ const BorderCountries = ({ country, data }: any) => {
       {country.borders !== undefined && countries !== undefined
         ? countries.map((item: any) => {
             return (
-              <p className="element" key={item.name.common}>
-                <span
-                  onClick={() => {
-                    dispatch(setCountry(item));
-                    router.push({
-                      pathname: "/detailed",
-                      query: { single: item.name.common },
-                    });
-                  }}
-                >
-                  {item.name.common}
-                </span>
+              <p
+                className="element"
+                key={item.name.common}
+                onClick={() => {
+                  dispatch(setCountry(item));
+                  router.push({
+                    pathname: "/detailed",
+                    query: { single: item.name.common },
+                  });
+                }}
+              >
+                {item.name.common}
               </p>
             );
           })

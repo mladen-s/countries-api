@@ -1,12 +1,14 @@
-import { useState } from "react";
 import { BsMoon, BsMoonFill } from "react-icons/bs";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setDark } from "../redux/themeSlice";
 
-const Header = () => {
-  const theme = useSelector((state: any) => state.theme.value);
+interface IHeader {
+  isDark: boolean;
+  setIsDark: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header = ({ isDark, setIsDark }: IHeader) => {
   const dispatch = useDispatch();
-  const [mode, setMode] = useState(theme);
 
   return (
     <div className="container element header">
@@ -14,12 +16,12 @@ const Header = () => {
       <button
         className="color-theme"
         onClick={() => {
-          setMode(!mode);
-          dispatch(setDark(!mode));
+          setIsDark(!isDark);
+          dispatch(setDark(!isDark));
         }}
       >
-        {mode ? <BsMoon /> : <BsMoonFill />}
-        {mode ? ` Light Mode` : ` Dark Mode`}
+        {isDark ? <BsMoon /> : <BsMoonFill />}
+        {isDark ? ` Light Mode` : ` Dark Mode`}
       </button>
     </div>
   );
