@@ -305,46 +305,85 @@ img {
 
 /* Dark mode */
 
+.dark body {
+  background: var(--dark-mode-background-blue);
+}
+.dark .container,
+.dark .element,
+.dark .color-theme,
+.dark svg polyline {
+  color: var(--dark-mode-text-light-mode-elements-white);
+  stroke: var(--dark-mode-text-light-mode-elements-white);
+}
+.dark .container,
+.dark .color-theme {
+  background: var(--dark-mode-background-blue);
+}
+.dark .element,
+.dark .color-theme {
+  background: var(--dark-mode-elements-blue);
+}
+
+.dark .input input {
+  background: var(--dark-mode-elements-blue);
+  opacity: 0.8;
+}
+.dark .input ::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--dark-mode-text-light-mode-elements-white);
+  opacity: 1; /* Firefox */
+}
+
+.dark .input :-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--dark-mode-text-light-mode-elements-white);
+}
+
+.dark .input ::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--dark-mode-text-light-mode-elements-white);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 
-  .dark body {
+  body {
     background: var(--dark-mode-background-blue);
   }
-  .dark .container,
-  .dark .element,
-  .dark .color-theme,
-  .dark svg polyline {
+  .container,
+  .element,
+  .color-theme,
+  svg polyline {
     color: var(--dark-mode-text-light-mode-elements-white);
     stroke: var(--dark-mode-text-light-mode-elements-white);
   }
-  .dark .container,
-  .dark .color-theme {
+  .container,
+  .color-theme {
     background: var(--dark-mode-background-blue);
   }
-  .dark .element,
-  .dark .color-theme {
+  .element,
+  .color-theme {
     background: var(--dark-mode-elements-blue);
   }
 
-  .dark .input input {
+  .input input {
     background: var(--dark-mode-elements-blue);
     opacity: 0.8;
   }
-  .dark .input ::placeholder {
+  .input ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: var(--dark-mode-text-light-mode-elements-white);
     opacity: 1; /* Firefox */
   }
 
-  .dark .input :-ms-input-placeholder {
+  .input :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: var(--dark-mode-text-light-mode-elements-white);
   }
 
-  .dark .input ::-ms-input-placeholder {
+  .input ::-ms-input-placeholder {
     /* Microsoft Edge */
     color: var(--dark-mode-text-light-mode-elements-white);
   }
