@@ -9,10 +9,16 @@ import { JSONValue } from "../interface";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 // reorder alphabetically
-export const sortAZ = (arr: JSONValue) => {
-  arr.sort((a: JSONValue, b: JSONValue) =>
+export const sortAZ = (
+  data: JSONValue,
+  func: React.Dispatch<React.SetStateAction<JSONValue>>
+) => {
+  let array = [...data];
+
+  array.sort((a: JSONValue, b: JSONValue) =>
     a.name.common.localeCompare(b.name.common)
   );
+  func(array);
 };
 
 const MainContent = ({ data }: JSONValue) => {
@@ -50,15 +56,14 @@ const MainContent = ({ data }: JSONValue) => {
     });
     if (dataLength > content.length) {
       setDataLength(content.length);
+      setHasMore(false);
     }
   };
 
   useEffect(() => {
     if (region.length === 0) {
       if (input.length === 0) {
-        let array = [...data];
-        sortAZ(array);
-        setContent(array);
+        sortAZ(data, setContent);
         setDataLength(8);
       } else {
         const inputData = data.filter((country: JSONValue) => {
@@ -67,6 +72,7 @@ const MainContent = ({ data }: JSONValue) => {
           return countryName.match(re);
         });
 
+        // trying to move exact input countries ahead in array
         inputData.forEach((country: JSONValue, i: number) => {
           let countryName = country.name.common.toLowerCase();
 
@@ -79,7 +85,7 @@ const MainContent = ({ data }: JSONValue) => {
           }
         });
 
-        setContent(inputData);
+        sortAZ(inputData, setContent);
         setDataLength(8);
       }
     } else {
@@ -93,13 +99,10 @@ const MainContent = ({ data }: JSONValue) => {
           return countryName.match(re);
         });
 
-        setContent(inputData);
+        sortAZ(inputData, setContent);
         setDataLength(8);
       }
     }
-
-    // console.log(data);
-    // console.log(input);
   }, [input, region]);
 
   return (

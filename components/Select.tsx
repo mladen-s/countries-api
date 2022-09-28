@@ -52,9 +52,7 @@ const Select = ({
                     return country.region == region;
                   });
 
-                  let array = [...regData];
-                  sortAZ(array);
-                  setContent(array);
+                  sortAZ(regData, setContent);
                   setDataLength(8);
                 }}
               >
