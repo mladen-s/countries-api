@@ -10,6 +10,7 @@ interface ISelect {
   setRegion: React.Dispatch<React.SetStateAction<string>>;
   setContent: React.Dispatch<React.SetStateAction<JSONValue>>;
   data: JSONValue;
+  setDataLength: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Select = ({
@@ -18,6 +19,7 @@ const Select = ({
   setRegion,
   setContent,
   data,
+  setDataLength,
 }: ISelect) => {
   const [clicked, setClicked] = useState(false);
 
@@ -53,6 +55,7 @@ const Select = ({
                   let array = [...regData];
                   sortAZ(array);
                   setContent(array);
+                  setDataLength(8);
                 }}
               >
                 {region}

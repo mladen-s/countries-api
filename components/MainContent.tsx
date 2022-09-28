@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
 import { JSONValue } from "../interface";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // reorder alphabetically
 export const sortAZ = (arr: JSONValue) => {
@@ -20,6 +21,8 @@ const MainContent = ({ data }: JSONValue) => {
   const [content, setContent] = useState(data);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [hasMore, setHasMore] = useState(true);
+  const [dataLength, setDataLength] = useState(8);
 
   const re = RegExp(`.*${input.toLowerCase().split("").join(".*")}.*`);
 
@@ -40,12 +43,23 @@ const MainContent = ({ data }: JSONValue) => {
     arr.splice(toIndex, 0, element);
   }
 
+  // infinite scroll load more countries
+  const loadMore = () => {
+    setDataLength((lng) => {
+      return (lng = lng + 8);
+    });
+    if (dataLength > content.length) {
+      setDataLength(content.length);
+    }
+  };
+
   useEffect(() => {
     if (region.length === 0) {
       if (input.length === 0) {
         let array = [...data];
         sortAZ(array);
         setContent(array);
+        setDataLength(8);
       } else {
         const inputData = data.filter((country: JSONValue) => {
           let countryName = country.name.common.toLowerCase();
@@ -66,6 +80,7 @@ const MainContent = ({ data }: JSONValue) => {
         });
 
         setContent(inputData);
+        setDataLength(8);
       }
     } else {
       if (input.length > 0) {
@@ -79,6 +94,7 @@ const MainContent = ({ data }: JSONValue) => {
         });
 
         setContent(inputData);
+        setDataLength(8);
       }
     }
 
@@ -95,25 +111,37 @@ const MainContent = ({ data }: JSONValue) => {
         regionState={region}
         setContent={setContent}
         data={data}
+        setDataLength={setDataLength}
       />
       <div className="list">
         <ul>
-          {content.map((country: JSONValue) => {
-            return (
-              <li
-                key={country.name.common}
-                onClick={() => {
-                  dispatch(setCountry(country));
-                  router.push({
-                    pathname: "/detailed",
-                    query: { single: country.name.common },
-                  });
-                }}
-              >
-                <Country country={country} />
-              </li>
-            );
-          })}
+          <InfiniteScroll
+            dataLength={dataLength}
+            next={loadMore}
+            hasMore={hasMore}
+            loader={<p className="element">Loading...</p>}
+          >
+            {content.map((country: JSONValue, index: number) => {
+              if (index >= dataLength) {
+                return;
+              } else {
+                return (
+                  <li
+                    key={country.name.common}
+                    onClick={() => {
+                      dispatch(setCountry(country));
+                      router.push({
+                        pathname: "/detailed",
+                        query: { single: country.name.common },
+                      });
+                    }}
+                  >
+                    <Country country={country} />
+                  </li>
+                );
+              }
+            })}
+          </InfiniteScroll>
         </ul>
       </div>
     </div>
