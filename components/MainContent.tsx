@@ -7,6 +7,13 @@ import { useDispatch } from "react-redux";
 import { setCountry } from "../redux/countrySlice";
 import { JSONValue } from "../interface";
 
+// reorder alphabetically
+export const sortAZ = (arr: JSONValue) => {
+  arr.sort((a: JSONValue, b: JSONValue) =>
+    a.name.common.localeCompare(b.name.common)
+  );
+};
+
 const MainContent = ({ data }: JSONValue) => {
   const [input, setInput] = useState("");
   const [region, setRegion] = useState("");
@@ -36,7 +43,9 @@ const MainContent = ({ data }: JSONValue) => {
   useEffect(() => {
     if (region.length === 0) {
       if (input.length === 0) {
-        setContent(data);
+        let array = [...data];
+        sortAZ(array);
+        setContent(array);
       } else {
         const inputData = data.filter((country: JSONValue) => {
           let countryName = country.name.common.toLowerCase();

@@ -2,6 +2,7 @@ import { GrFormDown } from "react-icons/gr";
 import { BsCheckLg } from "react-icons/bs";
 import React, { useState } from "react";
 import { JSONValue } from "../interface";
+import { sortAZ } from "./MainContent";
 
 interface ISelect {
   regionState: string;
@@ -48,7 +49,10 @@ const Select = ({
                   const regData = data.filter((country: JSONValue) => {
                     return country.region == region;
                   });
-                  setContent(regData);
+
+                  let array = [...regData];
+                  sortAZ(array);
+                  setContent(array);
                 }}
               >
                 {region}
