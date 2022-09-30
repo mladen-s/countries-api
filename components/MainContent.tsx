@@ -107,45 +107,47 @@ const MainContent = ({ data }: JSONValue) => {
 
   return (
     <div className="container main">
-      <Input setInput={setInput} />
-      <Select
-        regions={regions}
-        setRegion={setRegion}
-        regionState={region}
-        setContent={setContent}
-        data={data}
-        setDataLength={setDataLength}
-      />
-      <div className="list">
-        <ul>
-          <InfiniteScroll
-            dataLength={dataLength}
-            next={loadMore}
-            hasMore={hasMore}
-            loader={<p className="element">Loading...</p>}
-          >
-            {content.map((country: JSONValue, index: number) => {
-              if (index >= dataLength) {
-                return;
-              } else {
-                return (
-                  <li
-                    key={country.name.common}
-                    onClick={() => {
-                      dispatch(setCountry(country));
-                      router.push({
-                        pathname: "/detailed",
-                        query: { single: country.name.common },
-                      });
-                    }}
-                  >
-                    <Country country={country} />
-                  </li>
-                );
-              }
-            })}
-          </InfiniteScroll>
-        </ul>
+      <div className="home">
+        <Input setInput={setInput} />
+        <Select
+          regions={regions}
+          setRegion={setRegion}
+          regionState={region}
+          setContent={setContent}
+          data={data}
+          setDataLength={setDataLength}
+        />
+        <div className="list">
+          <ul>
+            <InfiniteScroll
+              dataLength={dataLength}
+              next={loadMore}
+              hasMore={hasMore}
+              loader={<p className="element">Loading...</p>}
+            >
+              {content.map((country: JSONValue, index: number) => {
+                if (index >= dataLength) {
+                  return;
+                } else {
+                  return (
+                    <li
+                      key={country.name.common}
+                      onClick={() => {
+                        dispatch(setCountry(country));
+                        router.push({
+                          pathname: "/detailed",
+                          query: { single: country.name.common },
+                        });
+                      }}
+                    >
+                      <Country country={country} />
+                    </li>
+                  );
+                }
+              })}
+            </InfiniteScroll>
+          </ul>
+        </div>
       </div>
     </div>
   );
