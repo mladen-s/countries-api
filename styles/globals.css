@@ -6,6 +6,7 @@
   --light-mode-background-gray: hsl(0, 0%, 98%);
   --light-mode-hover-gray: hsl(0, 8%, 90%);
   --dark-mode-text-light-mode-elements-white: hsl(0, 0%, 100%);
+  --dark-mode-hover-blue: hsl(220, 15%, 28%);
   --homepage-items-font: 14px;
   --detail-page-font: 16px;
   --mobile-width: 375px;
@@ -47,6 +48,10 @@ img {
   display: block;
 }
 
+.home {
+  width: 100%;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -69,6 +74,7 @@ img {
   border: none;
   background-color: var(--dark-mode-text-light-mode-elements-white);
   color: var(--light-mode-text-blue);
+  cursor: pointer;
 }
 
 .container .main {
@@ -89,6 +95,7 @@ img {
   margin: 0 0 5px;
   align-self: flex-start;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .input {
@@ -211,12 +218,20 @@ img {
 }
 
 .main .country {
+  width: min-content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 0 0 40px;
-  margin: 0 35px 42px;
+  margin: 0 20px 42px;
   cursor: pointer;
+}
+
+.main .list .infinite-scroll-component {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .main .country p,
@@ -231,7 +246,7 @@ img {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid hsl(0, 0%, 50%, 0.2);
-  width: 100%;
+  width: 300px;
   height: 180px;
   margin: 0 0 25px;
 }
@@ -242,8 +257,9 @@ img {
 
 /* detailed page */
 .back {
+  width: 100px;
   padding: 5px 25px;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
 
   border: none;
@@ -306,7 +322,7 @@ img {
   padding: 5px 15px;
   margin: 5px;
   font-size: 0.8rem;
-  border-radius: 2px;
+  border-radius: 3px;
   justify-content: center;
 
   border: none;
@@ -365,9 +381,6 @@ img {
 }
 
 @media screen and (min-width: 995px) {
-  .main {
-  }
-
   .main .home {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
@@ -398,13 +411,8 @@ img {
     grid-column: 1/3;
     margin: auto;
   }
-  .main .list .infinite-scroll-component {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  ul li {
+
+  .list ul li {
     width: 322px;
     min-height: 410px;
     margin: 0 0 70px;
@@ -418,23 +426,109 @@ img {
     margin: 0;
   }
 
-  img {
+  .country img {
     height: 200px;
+    width: 322px;
   }
 
   /* detailed */
 
   .country.detailed {
+    min-height: 80vh;
+    width: 70vw;
     cursor: auto;
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 5;
+    gap: 50px;
+  }
+  .detailed .back {
+    width: 100px;
+    grid-column: 1/3;
+    grid-row: 1;
+    align-self: center;
+    margin: 20px 0;
   }
 
   .main .detailed img {
-    height: 340px;
+    height: 310px;
     width: 470px;
+    grid-column: 1/3;
+    grid-row: 2;
   }
 
-  .border-countries p:hover {
+  .detailed .country-name {
+    grid-column: 1/2;
+    grid-row: 3;
+  }
+  .detailed .base-info {
+    grid-column: 1/2;
+    grid-row: 4;
+  }
+  .detailed .additional-info {
+    grid-column: 2/3;
+    grid-row: 4;
+  }
+  .detailed .border {
+    grid-column: 1/3;
+    grid-row: 5;
+  }
+
+  .border-countries p:hover,
+  .detailed .back:hover {
     background: var(--light-mode-hover-gray);
+  }
+
+  /* dark hover */
+  .dark .back:hover,
+  .dark .border-countries p:hover,
+  .dark .infinite-scroll-component .country:hover {
+    background: var(--dark-mode-hover-blue);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .home {
+    width: 80vw;
+  }
+  .country.detailed {
+    min-height: 80vh;
+    cursor: auto;
+    display: grid;
+    grid-template-columns: 4;
+    grid-template-rows: 5;
+    gap: 50px;
+  }
+  .detailed .back {
+    width: 100px;
+    grid-column: 1/5;
+    grid-row: 1;
+    align-self: center;
+    margin: 20px 0;
+  }
+
+  .main .detailed img {
+    height: 470px;
+    width: 650px;
+    grid-column: 1/3;
+    grid-row: 2/6;
+  }
+
+  .detailed .country-name {
+    grid-column: 3/5;
+    grid-row: 2/3;
+  }
+  .detailed .base-info {
+    grid-column: 3/4;
+    grid-row: 3/4;
+  }
+  .detailed .additional-info {
+    grid-column: 4/5;
+    grid-row: 3/4;
+  }
+  .detailed .border {
+    grid-column: 3/5;
+    grid-row: 4/5;
   }
 }
 

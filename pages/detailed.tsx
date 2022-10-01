@@ -80,7 +80,7 @@ const Detailed = () => {
             </a>
           </Link>
           <img src={country.flags.png} alt={"flag of " + country.name.common} />
-          <h2>{country.name.common}</h2>
+          <h2 className="country-name">{country.name.common}</h2>
           <div className="base-info info">
             <p>
               <span className="medium-bold"> Native Name:</span>{" "}
