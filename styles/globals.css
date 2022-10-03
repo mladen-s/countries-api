@@ -246,7 +246,7 @@ img {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid hsl(0, 0%, 50%, 0.2);
-  width: 300px;
+  width: 299px;
   height: 180px;
   margin: 0 0 25px;
 }
@@ -358,6 +358,9 @@ img {
 .dark .element,
 .dark .color-theme {
   background: var(--dark-mode-elements-blue);
+}
+.dark .home img {
+  border-color: var(--dark-mode-elements-blue);
 }
 
 .dark .input input {

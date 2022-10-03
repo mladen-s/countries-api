@@ -11,6 +11,7 @@ interface ISelect {
   setContent: React.Dispatch<React.SetStateAction<JSONValue>>;
   data: JSONValue;
   setDataLength: React.Dispatch<React.SetStateAction<number>>;
+  setHasMore: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Select = ({
@@ -20,6 +21,7 @@ const Select = ({
   setContent,
   data,
   setDataLength,
+  setHasMore,
 }: ISelect) => {
   const [clicked, setClicked] = useState(false);
 
@@ -47,12 +49,12 @@ const Select = ({
                 key={region}
                 onClick={() => {
                   region === regionState ? setRegion("") : setRegion(region);
-
                   const regData = data.filter((country: JSONValue) => {
                     return country.region == region;
                   });
 
                   sortAZ(regData, setContent);
+                  setHasMore(true);
                   setDataLength(8);
                 }}
               >

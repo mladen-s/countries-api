@@ -116,6 +116,7 @@ const MainContent = ({ data }: JSONValue) => {
           setContent={setContent}
           data={data}
           setDataLength={setDataLength}
+          setHasMore={setHasMore}
         />
         <div className="list">
           <ul>
@@ -123,7 +124,15 @@ const MainContent = ({ data }: JSONValue) => {
               dataLength={dataLength}
               next={loadMore}
               hasMore={hasMore}
-              loader={<p className="element">Loading...</p>}
+              loader={
+                content.length === 0 ? (
+                  <p className="element">
+                    There are no countries with chosen parameters.
+                  </p>
+                ) : (
+                  <p className="element">Loading...</p>
+                )
+              }
             >
               {content.map((country: JSONValue, index: number) => {
                 if (index >= dataLength) {
