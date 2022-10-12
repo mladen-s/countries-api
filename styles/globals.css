@@ -116,6 +116,7 @@ img {
 }
 
 .input input {
+  flex: 1 1 auto;
   border-style: none;
   margin: 0 0 0 30px;
   background: var(--dark-mode-text-light-mode-elements-white);
@@ -366,6 +367,7 @@ img {
 .dark .input input {
   background: var(--dark-mode-elements-blue);
   opacity: 0.8;
+  color: var(--dark-mode-text-light-mode-elements-white);
 }
 .dark .input ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */

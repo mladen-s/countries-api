@@ -15,8 +15,8 @@ const Input = ({ setInput }: IInput) => {
         onChange={(e) => {
           let input = e.target.value;
 
-          // regexp for accepting only letters
-          const re = RegExp(`[^A-Za-z]`);
+          // regexp for accepting only letters and spaces
+          const re = RegExp(`[^A-Za-z]\s`);
           if (re.test(input)) {
             e.target.value = e.target.value.replace(re, "");
             input = e.target.value;
